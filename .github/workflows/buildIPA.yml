@@ -59,13 +59,13 @@ jobs:
           sudo chmod +x /usr/local/bin/ivinject-arm64
       - name: Compile CKStub
         run: |
-          xcrun clang -arch arm64 -shared -fobjc-arc -framework Foundation -o ckstub.dylib CKStub.m
+          xcrun clang -arch arm64 -isysroot "$(xcrun --sdk iphoneos --show-sdk-path)" -target arm64-apple-ios12.0 -shared -fobjc-arc -framework Foundation -o ckstub.dylib CKStub.m
 
       - name: Create Goodnotes package
         run: |
           ivinject-arm64 goodnotes.ipa stage1.ipa \
             -i badnotes.dylib \
-            -s - -d -u --level Fastest
+            -s - -d --level Fastest
           ivinject-arm64 stage1.ipa Badnotes.ipa \
             -i ckstub.dylib \
             -s - -d --level Optimal
