@@ -63,11 +63,11 @@ jobs:
 
       - name: Create Goodnotes package
         run: |
-          ivinject-arm64 goodnotes.ipa stage1.ipa \\
-            -i badnotes.dylib \\
+          ivinject-arm64 goodnotes.ipa stage1.ipa \
+            -i badnotes.dylib \
             -s - -d -u --level Fastest
-          ivinject-arm64 stage1.ipa Badnotes.ipa \\
-            -i ckstub.dylib \\
+          ivinject-arm64 stage1.ipa Badnotes.ipa \
+            -i ckstub.dylib \
             -s - -d --level Optimal
 
       - name: Upload to GitHub Releases
