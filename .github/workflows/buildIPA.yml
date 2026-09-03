@@ -56,7 +56,7 @@ jobs:
           cp -r ./ivinject/KnownFrameworks ~/.ivinject
           wget https://github.com/whoeevee/ivinject/releases/download/first/ivinject-arm64
           sudo mv ivinject-arm64 /usr/local/bin/
-          sudo chmod +x ivinject-arm64
+          sudo chmod +x /usr/local/bin/ivinject-arm64
       - name: Create Goodnotes package
         run: |
           ivinject-arm64 goodnotes.ipa Badnotes.ipa \
