@@ -57,11 +57,18 @@ jobs:
           wget https://github.com/whoeevee/ivinject/releases/download/first/ivinject-arm64
           sudo mv ivinject-arm64 /usr/local/bin/
           sudo chmod +x /usr/local/bin/ivinject-arm64
+      - name: Compile CKStub
+        run: |
+          xcrun clang -arch arm64 -shared -fobjc-arc -framework Foundation -o ckstub.dylib CKStub.m
+
       - name: Create Goodnotes package
         run: |
           ivinject-arm64 goodnotes.ipa Badnotes.ipa \
             -i badnotes.dylib \
-            -s - -d --level Optimal
+            -f -d --level Fast
+          ivinject-arm64 stage1.ipa Badnotes.ipa \
+            -i ckstub.dylib \
+            -d --level Optimal
 
       - name: Upload to GitHub Releases
         uses: softprops/action-gh-release@v2.0.1
